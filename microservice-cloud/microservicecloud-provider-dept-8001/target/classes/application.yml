@@ -1,0 +1,36 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: microservicecloud-dept
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/micro01?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&useLocalSessionState=true
+    username: root
+    password: root123456
+    dbcp2:
+      min-idle: 5           #数据库连接池的最小维持连接数
+      initial-size: 10      # 初始化连接数
+      max-total: 5         #最大连接数
+      max-wait-millis: 200 #等待连接获取的最大超时时间
+mybatis:
+ # config-location: classpath:mybatis/mybatis.cfg.xml
+  type-aliases-package: com.ccy.springclod.entity
+  mapper-locations:
+  - classpath:mybatis/mapper/**/*.xml
+eureka:
+  client:
+    service-url:
+      #defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka,http://eureka7003.com:7003/eureka
+      defaultZone: http://eureka7001.com:7001/eureka/
+  instance:
+    instance-id: microservicecloud-dept8001   # 服务别名处理
+    prefer-ip-address: true                   # 访问路径显示ip地址
+#服务info信息
+info:
+  app.name: ccy-microservicecloud
+  company.name: www.ccy.com
+  build.artifactId: microservicecloud-provider-dept-8001
+  build.version: 1.0-SNAPSHOT

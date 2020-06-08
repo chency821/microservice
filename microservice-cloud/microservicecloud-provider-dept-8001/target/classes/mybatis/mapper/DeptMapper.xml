@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ccy.springcloud.dao.DeptDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ccy.springcloud.entity.Dept">
+        <id column="deptno" property="deptno" />
+        <result column="dname" property="dname" />
+        <result column="db_source" property="db_source" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        deptno, dname, db_source
+    </sql>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from dept
+    </select>
+
+    <select id="findById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from dept
+        where deptno = #{deptno}
+    </select>
+
+    <insert id="addDept" parameterType="com.ccy.springcloud.entity.Dept">
+        INSERT INTO dept(dname, db_source)
+        VALUES (#{dname}, DATABASE ())
+    </insert>
+
+</mapper>
